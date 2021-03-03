@@ -487,7 +487,105 @@ Every symbol value returned from Symbol() is unique.  A symbol value may be used
 ____________________________
 Operators ---
 
-STARTING HERE TOMORROW. 
+A special function that is syntactically written differently.  Generally operators take two parameters and return one result. 
+
+var a = 3 + 4;
+console.log(a);
+
+in conosle: 
+//=> 7 
+
+How did the JS engine know that our intent was to add 3 and 4?  The engine saw the plus sign when it ran the code and saw the numbers three and four on either side and knew to add them together.  The plus sign '+' is an operator. And its actually a function. This uses in-fix notation, meaning that the function or operator sits between the two parameters '3 + 4' and returns the value of them which would be '7'
+
+Pre-fix notation + 3 4;
+In-fix notation 3 + 4; 
+Post-fix notation 3 4+;
+
+var a = 4 - 3;
+console.log(a);
+
+in console: 
+//=> 1 
+
+var a = 4 > 3;
+console.log(a);
+
+in console: 
+//=> true 
+
+This is the concept to keep in mind, that when we type these operators, that these are actually special types of functions. That these parameters are being passed to these functions and a value is being returned.  And inside those functions there is pre written code essentially for you that the JS provides to do, run, or invoke these functions.  And whats happening inside those functions is important to understand when dealing with a dynamically typed language. 
+
+
+_________________________________________________
+Operator Presedence and Associativity----
+
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence
+
+Operator Presedence-- which operator function gets called first. Functions are called in the order of presedence (HIGHER presedence wins)
+
+Associativity- what order operator functions get called in : left to right or right to left when functions have the same presedence.  
+
+var a = 3 + 4 * 5;
+console.log(a);
+
+in console: 
+//=> 23; 
+
+There is an order to these operators.  Remember these are two function calls. JS is Synchronous so these aren't going to be run at the same time.    So in this case Multiplication has a higher precedence than addition. Which is why we get 23 and not 35 because it isnt reading left to right.  The JS engine knows that * take presedence over +. 
+
+What happens when a operator has the same associativity as the other operator? 
+
+var a = 2, b = 3, c = 4;
+
+a = b = c; 
+
+console.log(a);
+console.log(b);
+console.log(c);
+//=>4
+//=>4
+//=>4
+
+They are all equal to 4. Why? Because of associativity.  Associativity is either a left-to-right associativty, meaning the furthest operator to the left will be called first.  Or it will be a right-to-left associativty meaning the furthest operator the the right will be called first. Here we are using the assignment operator '=' and its associativity is right-to-left. It is right associative, meaning that 
+
+a = b = c;
+
+These all take the same presedence over one another, and since the assignment operator is a right-to-left associative it looks to the furthest value to the right. Which we gave a value of four. 
+
+Seeing as operators take in two parameters and return its value like in the plus operator what does equals return?    
+
+b = c;
+//=> 4
+
+The method or the function called was invoked, it set the value in memory of 'b' equal to the value and memory of 'c'. And then returned the value of the parameter on the right, the parameter that we are setting equal too. So it returned the value of 4.  So this statment of equals is a function that returns a value. That means we can call it in order. So since this: 
+
+a = b = c; 
+
+Is right-to-left associativity it sets b = 4 and returns a 4.  a also has the value of 4. 
+
+BUT Grouping takes the highest presedence.  What that means is whatever is inside of the parenthesis will get run first.
+
+var a = 3 + 4 * 5;
+console.log(a);
+
+This gave us a value of 23.  Because 5 * 4 = 20.  Then it took that value of 20 and added 3 which gave us? 23.  
+
+But what happens when we run this? 
+
+var a = (3 + 4) * 5;
+console.log(a);
+
+in console: 
+//=> 35; 
+
+The JS engine looked at the presedence of the parenthesis and chose to execute that first which gives you the value of 7, then JS took that value and multiplied it by 5 which gave us 35. 
+
+________________________________
+
+Coercion----
+
+
+
 
 
 
