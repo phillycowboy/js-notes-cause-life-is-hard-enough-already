@@ -966,6 +966,107 @@ can have a a primitive property
 can have another object connected to it as a child 
 can have functions 'method' in those case when the function is sitting on the object it is called a method. 
 
+So Objects have Properties and Methods and these sit in memory, so the core object will have some sort of address in your computers memory and it will have references to these different properties and methods that are also sitting in your computers memory. They may be related to the address of that base Object concept or they may not.  Either way the Object has references to the addresses or the space of the spots where these different properties and methods live.   This may be obsucre but it will be important later, that you think about an object sitting in memory and then have references to other things sitting in memory that are connected to it, so it knows where its different properties and methods are that make it up. So now lets look at how we access that properties and functions of an object: 
+
+var person = new Object();
+
+person["firstname"] = "Ben";  (so this is a property, this is one way to set and access properties)
+
+THERE ARE BETTER WAYS TO DO THIS THIS IS THE MOST OBVIOUS WAY TO SHOW YOU A NEW OBJECT.  
+
+The brackets we are using can be referred to as Bracket Notation or Computed Member Access it is an operator. And it has left-to-right associativity.   So what the operator does is take this object and this property or method name and it looks for it on the object. There are a couple of ways to access these properties. By logging the object and then call the bracket notation on it, or by simply calling the object: 
+
+var person = new Object();
+
+person["firstname"] = "Ben";
+person["lastname"] = "Murphy";
+
+firstNameProperty = "firstname";
+
+console.log(person);
+console.log(person[firstNameProperty]);
+
+//=> {firstname: "Ben", lastname: "Murphy"}
+firstname: "Ben"
+lastname: "Murphy"
+__proto__: Object
+
+//=>Ben
+
+So this object should look at the variable of firstNameProperty and see that its pointing to a value of "firstname", JS then sees that "firstname" is pointing to a value of "Ben"  and that is why we get the value of Ben on the second log. We also outputted the object it self and we can see the two properties that we set in the form of a hash. This operator that we just talked about [] you will see in other programming languages and libraires because you can dynamically decide what value or property you are trying to get. But the next operator is much easier and clearer to type: 
+
+var person = new Object();
+
+person["firstname"] = "Ben";
+person["lastname"] = "Murphy";
+
+firstNameProperty = "firstname";
+
+console.log(person);
+console.log(person[firstNameProperty]);
+
+console.log(person.firstname);
+
+//=> Object 
+//=> Ben
+//=> Ben
+
+The last output is the from the dot operator. The '.' is an operator its a function and when used after an object like that it will read left-to-right.  Another name for it is the Member Access Operator, or dot notation and it has left-to-right associativity. It takes two parameters the object 'person' and the name of the property 'firstname'.  Notice that we dont have to put the property in quotes although that is essentially what it is doing. Its taking the object and passing the string that is the name of the value of the property of 'firstname'.  The syntax parser should recognize or look for the string that is given to the dot. REMEMBER it is called Computed Member and Member Accesss because it is looking for a MEMBER of the object- the methods and properties. You could also do this: 
+
+console.log(person.firstname);
+console.log(person.lastname);
+
+//=>Ben
+//=>Murphy 
+
+Remeber that you can also attach other objects to the main object that have name/value pairs: 
+
+person.address = new Object();
+
+SO here we are creating a new Object within the already existing object or the main object of person and attaching the object of address. So now you can use the dot operator to add other properties to the child object: 
+
+person.address.street = "111 Main St";
+
+Remember that these are operators so how do we know which one will get run first?  It we look at the associativity of the dot operator we see that it gets read left-to-right meaning that the left most dot will get run first. So at the first dot it is looking for an object called person that looking for another object within that first object of address, than after the next dot it is looking for a property of street and when it does finds the value of '111 Main St.'. And you can continue to do this as much as you need too: 
+
+person.address.city = "New York";
+person.address.state = "NY";
+
+We could keep going with this pattern because of the dot operator and because it is left associative. and if we log it we get: 
+
+person.address = new Object();
+
+person.address.street = "111 Main St";
+
+person.address.city = "New York";
+person.address.state = "NY";
+
+console.log(person.address)
+
+//=> {street: "111 Main St", city: "New York", state: "NY"}
+city: "New York"
+state: "NY"
+street: "111 Main St"
+__proto__: Object
+
+All of these objects and properties and methods are now just sitting in memeory. And all of these dots or brackets are just functions and a way to access them.  You can access them both ways: 
+
+console.log(person.address.street);
+console.log(person.address.city);
+console.log(person["address"]["state"]);
+
+//=> 111 Main St.
+//=> New York 
+//=> NY 
+
+These are essentially doing the same thing, either bracket or dot they are both left associative and read from left-to-right. The preffered way to find these methods or properties is the dot operator.  It is easier to debug, unless you need to dynamically type a string go for it, otherwise stick with the dot.  REMEMBER this is also not the preffered way to make a new Object.  * IM FOLLOWING THE VIDEO AS WELL IF HE GETS TO IT ILL SPELL IT OUT FOR YOU TOO* 
+
+_________________________________
+
+Objects and Objet Literals -----
+
+START HERE TOMORROW 
+
 
 
 
