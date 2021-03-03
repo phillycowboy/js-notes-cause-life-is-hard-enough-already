@@ -919,6 +919,59 @@ _______________________________
 FRAMEWORK ASIDE ----
 How different frameworks and libraries work with JS universally 
 
+Lets pretend that lib1 and lib2 are both different libraries or frameworks and we are linking them to our JS app with these script tags defined in your index.html: 
+    <!-- <script src="lib1.js"></script> -->
+    <!-- <script src="lib2.js"></script> -->
+    <!-- <script src="app.js"></script> -->
+and then we are going to console.log in our main app.js the variable we have set in both lib1 and lib2 of libraryName 
+
+console.log(libraryName)
+
+
+what is happening with the script tags is just that we are stacking the code on top of one another.  they are not creating new execution contexts for each time the script tags are being looked at, but simply just orgainizing them.  its basically running all of these script tags as if all the JS that it contains is contained in a singular file. Lets run the code and see what we get from out log: 
+
+//=> Lib 2 
+
+So what happend? Looking out how the JS source files were loaded in the HTML lib1 was loaded as line 1, lib2 is loaded so thats line 2 of the code, and then console.log in our app.js.  This was all treated as Global Variable sitting inside the global environment as global execution context and thus attached to the window object.  So we declared var libraryName = "Lib 1"; and that was attached to the object and the var libraryName = "Lib 2"; just replaced it.  Maybe we accidentially collided with another library? What can we do? So lets go to lib2 and see if the variable is available within the global execution window: 
+
+window.libraryName = window.libraryName || "Lib 2";
+
+We are checking to see if there is already a libraryName in the Global Execution Context. if it is im not going to do anything. And if not using the OR operator we are going to set the default value.  And when we run this code it is: 
+
+//=> Lib 1 
+
+So Lib 1 attaches itself to the window object, and the code in lib2 is making sure that we are not colliding. So as of right now JS is not doing anything or throwing any errors if it finds something that has the same value or name as another variable. (probably why we use let and const because var can be reassigned and we can have 2 vars of the same name and have two completely different values.)
+
+This makes debugging a bit easier because if this does happen and entire library just wont show up. So it excludes itself by not doing anything at all as to not cause problems.  So when you look inside the source code and see this: 
+
+window.libraryName = window.libraryName || "Lib 2";
+
+It is checking the global namespace or the global object to check to see if something of that name is there so that it doesnt collide or override it. 
+
+
+_______________________________________
+
+Objects and Functions -----
+
+Alot of JS courses teach these two subjects as two different courses.  In other programming languages Objects and Functions are two completely seperate things,  but in JS they are very much related. 
+
+
+Objects and the Dot- 
+Remeber we've already said that Objects are collections of name/value pairs, and those values can be other collections of name/value pairs. 
+
+For now lets take another look at how an Object can exist, lets look at how an Object can live inside your computers memory. 
+
+OBJECT- 
+can have a a primitive property 
+can have another object connected to it as a child 
+can have functions 'method' in those case when the function is sitting on the object it is called a method. 
+
+
+
+
+
+
+
 
 
 
