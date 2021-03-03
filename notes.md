@@ -1067,6 +1067,8 @@ Objects and Objet Literals -----
 
 START HERE TOMORROW 
 
+ALSO BUY COURSE ON UDEMY
+
 
 
 
