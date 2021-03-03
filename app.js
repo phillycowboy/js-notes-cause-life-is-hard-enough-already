@@ -48,5 +48,21 @@
 // console.log(b);
 // console.log(c);
 
-var a = (3 + 4) * 5;
-console.log(a);
+// var a = (3 + 4) * 5;
+// console.log(a);
+
+// Coercion 
+
+
+// var a = 1 + 2; 
+// console.log(a); 
+
+// var a = 'hello' + 'world'; 
+// console.log(a); 
+
+// var a = 1 + '2'; 
+// console.log(a); 
+
+// COMPARISON OPERATORS 
+
+

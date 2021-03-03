@@ -584,6 +584,33 @@ ________________________________
 
 Coercion----
 
+Coercion- converting a value from one type to another.  This happens quite often in JS because its dynamically typed. Trying to "coerse" something a string to a number, or visa versa. 
+
+var a = 1 + 2; 
+console.log(a); 
+
+With the addition operator you know you would get the return value of 3.  But what if we do this? 
+
+var a = 'hello' + 'world'; 
+console.log(a); 
+
+//=> helloworld
+
+Instead of adding the numbers it concatonates the string by pushing them together. Now, heres the question what if i pass the operator two different types? 
+
+var a = 1 + '2'; 
+console.log(a); 
+
+//=> 12
+
+If we give this function a number and a string we get the value of what looks like 12, what got returned was as if the two values were two strings. What happened was the first value of an integer of 1 was coercised by the JS engine into a string.  In memory the integer 1 and the string '1' look nothing alike. When you call the plus operator and give it a number and a string then the JS engine makes a choice to try and coerce that number im going to try find out what it would be if it was a string. We never asked JS to coerce it, it did it by itself. 
+
+
+_______________________________________________
+
+Comparison Operators---
+
+
 
 
 
