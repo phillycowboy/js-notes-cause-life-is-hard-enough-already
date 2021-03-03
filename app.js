@@ -65,4 +65,49 @@
 
 // COMPARISON OPERATORS 
 
+// console.log(1 < 2 < 3);
+// console.log(3 < 2 < 1);
+
+// var a = 0; 
+// var b = false;
+
+// if (a !== b) {
+//     console.log("They are not equal");
+// } else {
+//     console.log("Equal");
+// }
+
+
+
+
+// EXISTENCE AND BOOLEANS 
+
+
+// some code that goes out into the internet and looks for some value 
+// anyhting we put in the if statment the condition will try to coerce it into a boolean true or false 
+// so it doesnt really matter what a is if we put it inside the conditional as the thing that we are checking it will attempt to convert it to a boolean 
+// var a = 0; 
+
+// if (a || a === 0) {
+//     console.log('Something is there');
+// }
+
+
+
+
+
+// DEFAULT VALUES 
+
+// function greet(name="ben") {
+    
+//     console.log('hello ' + name);
+// }
+
+// greet("steve");
+
+
+
+
+// FRAMEWORK ASIDE -- HOW JS CODE CAN BE UNIVERSAL WITH DIFFERENT LIBRAIRIES AND FRAMEWORKS
+
 

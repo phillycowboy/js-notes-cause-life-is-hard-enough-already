@@ -610,6 +610,317 @@ _______________________________________________
 
 Comparison Operators---
 
+console.log(1 < 2 < 3);
+//=> true 
+
+console.log(3 < 2 < 1);
+//=> true
+
+Why is the second statement returning true? We have to less-than operators so they have the same presedence.  So what determines which one gets run first? Less Than operators have a left-to-right associativity. 
+
+So:
+
+3 < 2 
+//=> false
+
+So now this statment is being run: 
+
+console.log(false < 1);
+
+So what does an operator do when I pass it two different values? Currently we are giving it a number and a boolean its going to try and convert or COERCE this boolean into a number. In your console if you type in 'Number(false)  //=> 0' you get a retrun value of 0. So now what is happening is this: 
+
+console.log(0 < 1);
+
+So the boolean of false became the number 0.  So is 0 less than 1? YES. So this becomes true. 
+
+console.log(3 < 2 < 1);
+console.log(false < 1); coerced into a number 
+console.log(0 < 1);
+//=> true  
+
+So from a human prespective the original statement should equate to false.  But from the JS engine prespective after running and coercing the code it breaks down to true. Even to the human eye this: 
+
+console.log(1 < 2 < 3);
+
+is true.  But the JS engine breaks it down like this: 
+
+console.log(1 < 2 < 3);
+console.log(true < 3);
+console.log(1 < 3);     (true gets coerced into 1 )
+console.log(1 < 3);     (is one less than 3? YES)
+//=> true 
+
+
+So we can coerce booleans into number and strings of numbers into numbers but what happens when we try and coerce 'undefined'?
+
+Number(undefined)
+//=> NaN       (stands for Not a Number)
+
+NaN means i have this thing that i tried to convert to a number and it just isnt a number, there is no way to convert it to a number. So undefined cant convert to a number but what about null? 
+
+Number(null)
+//=> 0 
+
+null JS decides is a zero. It isnt allways obvious what a particular type is going to coerce too. The JS engine decides, this can cause a lot of problems if you dont understand what is going on. You can believe that 'undefined' and 'null' are going to behave the same way, but they wont. So while Coercion is very powerful, it can be dangerous. So wouldnt it be nice if we had a way to check if two things are equal without coercion? Enter 'Equality'.
+
+Equality is '==' checking if somehting against another thing we usually use these in if statements. 
+
+3 == 3 
+//=> true 
+
+"3" == 3 
+//=> true 
+
+When false and true get coerced into numbers false = 0 and true = 1 
+
+false == 0;
+//=> true 
+
+true == 1 
+//=> true 
+
+null == 0 
+//=> false 
+
+So there are special cases like undefined and null that do what you wouldnt expect. false = 0, yes but null coerces to 0.
+
+null < 1 
+//=> true 
+
+It doesnt coerce to 0 for comparison. This causes all sorts of confusion and problems and why it is considered a negative part of the language.
+
+"" == 0 
+//=> true 
+"" == false 
+//=> true 
+
+The JS engine is attempting to convert these values to the same type.  But it could make your code very difficult to anticipate as far as whats going to happen. So how do we solve this? Strict Equality.  
+
+Equality is '=='
+Strict Equality is '==='
+
+as well as 
+
+Inequality is '!='
+Strict Inequality is '!=='
+
+Coming from other programming languages we see '===' and go wtf? This, this is gonna save our butts. 
+
+Strict Equality the triple equals '===' compares two things, its a standard operator but IT DOES NOT try and coerce the values. If the two values are not the same type it just says no they are not the same type and not equal and reutrns false. 
+
+3 === 3
+//=> true
+
+'3' === '3'
+//=> true 
+
+'3' === 3 
+//=> false 
+
+So the Strict Equality Operator will allows us to compare two things in our code, this will prevent any potential problems or bugs. 
+
+To compare what we just went over: 
+using Equality: 
+
+var a = 0; 
+var b = false;
+
+if (a == b) {
+    console.log("They are equal");
+} else {
+    console.log("Nope, not equal");
+}
+
+//=> They are equal 
+
+using Strict Equality: 
+
+var a = 0; 
+var b = false;
+
+if (a === b) {
+    console.log("They are equal");
+} else {
+    console.log("Nope, not equal");
+}
+
+//=> Nope, not equal
+
+In general try to use comparison in your code with values that you know will be the same type. And 99% of the time USE TRIPLE EQUALS(Strict Equality) when making equality comparisons, dont use double equals unless you explicitly, unless you conciously want to coerce the two values. You should start now by default if you havent yet using triple equals it will save you alot of time and frustration. Its the same with Strict Inequality and Inequality 
+
+var a = 0; 
+var b = false;
+
+if (a != b) {
+    console.log("They are not equal");
+} else {
+    console.log("Equal");
+}
+
+//=> Equal 
+
+var a = 0; 
+var b = false;
+
+if (a !== b) {
+    console.log("They are not equal");
+} else {
+    console.log("Equal");
+}
+
+//=> They are not equal
+
+Remember operators are just functions these are the same if we wrote out these like so: 
+
+function ==(a, b)
+function ===(a, b)
+
+A reference to know what is going to happen with all these comparisons: 
+
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness
+
+TO COMPARE AS WELL you can also use Object.is(two parameters you are comparing)
+
+Object.is(0, -0)
+//=> false 
+Object.is("hello", "hello")
+//=> true 
+
+
+
+_____________________________
+
+Existence and Booleans 
+
+in your console you can use the 'Boolean(parameter)' built in function for testing purpose dont actually use this in a program you are building. 
+
+Boolean(undefined)
+//=> false 
+Boolean(null)
+//=> false 
+Boolean("")
+//=> false 
+
+So all of these things that imply the lack of existence they convert to false, can we use that to our advantage? 
+
+var a; 
+
+// some code that goes out into the internet and looks for some value 
+// anyhting we put in the if statment the condition will try to coerce it into a boolean true or false 
+// so it doesnt really matter what a is if we put it inside the conditional as the thing that we are checking it will attempt to convert it to a boolean 
+
+if (a) {
+    console.log('Something is there');
+}
+
+If a is any of the above statements that came back as false, the if statment will fail and will return nothing. Naturally since a is not set to a value in our code when we declare the variable what is it going to return? 'undefined'  because during the creation phase it creates space in the memory for the variable of a, reads it during the execution phase sees that nothing is there and as a place holder puts undefined as its value until we assign it one.  But above what does undefined return in the built in function Boolean(undefined) //=> false. 
+So naturally this if statement is going to fail. But as soon as we pass 'a' a value: 
+
+var a = "hello"; 
+
+if (a) {
+    console.log('Something is there');
+}
+
+//=> Something is there.   (* chefs kiss *)
+
+See how that works? We can use Coercion to our advantage to see if a variable has a value. There is one caviat though: 
+
+Boolean(0)
+//=> false 
+
+var a = 0; 
+
+if (a) {
+    console.log('Something is there');
+}
+
+What do you think is going to return here?  This could be a problem, 0 is not the lack of existence maybe that it is a valid value but 'a' is going to be coerced just like this into a boolean so if we refresh the page and look in our console log we dont get a message because the above statement is false.  But to couteract what is happeing above we could do this. 
+
+var a = 0; 
+
+if (a || a === 0) {
+    console.log('Something is there');
+}
+
+//=> Something is there. 
+
+By using the Logical Or and then the triple equals, in rank, triple equals takes presedence over the Logical or, so the above code will run and the JS engine will see a === 0 first check to see if a value has been assigned to it, which it has, and then run the code inside the block. Which is why we get something returned to us because it is now a true statment. 
+
+if (a || a === 0) {
+    console.log('Something is there');
+}
+if (a || true) {
+    console.log('Something is there');
+}
+since the triple equals is not going to coerce the statement this happens: 
+if (false || true) {
+    console.log('Something is there');
+}
+if we run this statement in the console: 
+
+false || true 
+//=> true 
+
+the js engine will return true if one or both of the statements are true.  Since the above if statement was in fact true, we get the message returned. 
+
+__________________________________________
+
+Default Values ----
+
+function greet(name) {
+        console.log('hello ' + name);
+}
+
+greet("ben");
+
+//=> hello ben 
+
+But what if we called greet() without a parameter? 
+
+greet();
+
+Like many other programming languages JS doesnt care, it won't throw you an error it will just return nothing. 
+
+function greet(name) {
+    console.log(name);
+    console.log('hello ' + name);
+}
+
+greet();
+
+//=> undefined 
+//=> hello undefined 
+
+What happens when the function is invoked, a new execution context is created and this variable 'name' which is essentially created inside the function while its value is passed during its invocation is initially set when the memory space is set up to undefined.  JS simply ignores the fact that we invoked the function with out a value of name and comes back with it as undefined in the console as a placeholder. Its already in memory it has a value you simply didnt give me a new one. So when we get 'hello undefined' in the console JS saw the '+' operator saw that there were two different parameters inside 'hello' + name, and decided to coerce the value of name which is undefined to the string of undefined.  which is why we get 'hello undefined'. What if we want a default value for the parameter of name? 
+
+function greet(name="ben") {
+    console.log('hello ' + name);
+}
+
+greet();
+
+//=> hello ben 
+
+* if youre following along with the video as well this is not what he does within the video ES6 allows us to write it the above way to set a default value *
+By setting a value to the variable of name that get assigned in the function parameter, we are setting a default value, when we call or invoke the function and do not pass it a name or a string it will automatically assume that we want it to be the value we already predetermined.  But if we call the function and pass it another name this will happen: 
+
+function greet(name="ben") {
+    console.log('hello ' + name);
+}
+
+greet("steve");
+
+//=> hello steve 
+
+
+_______________________________
+
+FRAMEWORK ASIDE ----
+How different frameworks and libraries work with JS universally 
+
+
+
 
 
 
