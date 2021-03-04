@@ -1065,9 +1065,115 @@ _________________________________
 
 Objects and Objet Literals -----
 
-START HERE TOMORROW 
+In JS there is often more than one way to do something, now we are going to talk about Object Literals.  
 
-ALSO BUY COURSE ON UDEMY
+The first way we showed you how to make a new Object:
+
+var person = new Object();
+
+The shorthand for above is what we call an Object Literal: 
+
+var person = {};
+console.log(person);
+//=> {}
+
+What we get returned is an empty Object. Notice the way to write an Object Literal is not an operator, what is happening is that the JS engine when its parsing the syntax, when it comes across the curly braces and its not apart of an if statement or a for loop or something along those lines, it assumes that you are creating an Object. We can initialize the object, we can set up properties, and methods all within the curly braces which is essentially treated as one line of code. So for example: 
+
+var person = {firstname: 'Ben'}
+
+//=> {firstname: "Ben"}
+
+Also we can set multiple properties with a name value pair by seperating them with a comma. 
+
+var person = {firstname: 'Ben', lastname: 'Murphy'}
+console.log(person)
+
+//=> app.js:150 {firstname: "Ben", lastname: "Murphy"}
+
+So now we have two properties on our object. As in the last portion of our lesson we know that we can also add additional objects within our main object: 
+
+var person = {
+    firstname: 'Ben', 
+    lastname: 'Murphy',
+    address: {
+        street: '111 Main St',
+        city: 'New York',
+        state: 'NY'
+    }
+};
+
+console.log(person);
+//=> {firstname: "Ben", lastname: "Murphy", address: {…}}
+address:
+city: "New York"
+state: "NY"
+street: "111 Main St"
+__proto__: Object
+firstname: "Ben"
+lastname: "Murphy"
+__proto__: Object
+
+When the JS executes this line of code, it is treated as one line of code.  Then it sees the curly braces and assumes that you are creating an object.  And it looks for the name/value pairs seperated by a colon. And if it sees another set of curly braces within the object that it is reading, it knows that there is going to be another object within the main object. So we can drop in another object within the main object whenever and whereever we choose using this syntax. So this is the preferred way to create an object. It gets even more powerful when we know that we can create an object whereever we can make variables on the fly, its just the same as passing a number to a function, or a string.  For example lets say we a have a function that accepts a person object: 
+
+var ben = {
+    firstname: 'Ben', 
+    lastname: 'Murphy',
+    address: {
+        street: '111 Main St',
+        city: 'New York',
+        state: 'NY'
+    }
+};
+
+
+
+function greet(person){
+    console.log('Hi ' + person.firstname);
+}
+
+So we have a function that expects to have an object of person with a firstname property. So we could call greet(ben) and pass in ben. 
+
+greet(ben); 
+
+//=> Hi Ben 
+
+So this object that was created and sitting in memory is being passed to the function and its able to be used. BUT we could call the greet function and create an object on the fly: 
+
+greet({firstname: 'Mary', lastname: 'Doe'});
+
+We could also write it this way: 
+
+greet({ 
+    firstname: 'Mary',
+     lastname: 'Doe' 
+});
+
+We can use the object literal syntax within the function. And what JS sees is that we are calling a function and what are you going to pass to it? The JS engine just saw the curly brace so it knows that you are creating an object right here at this moment of execution, its no different than passing a number or a string, and in this case we are creating the object on the fly. So after calling these functions what should we see in the console log? Two greetings: 
+
+//=> Hi Ben 
+//=> Hi Mary
+
+Note that we can also mix and match our methodologies.  To create another object not within the Object Literal syntax we could simply write: 
+
+ben.address2 = {
+    street: '333 Second St.';
+}
+
+So why does this work? Remember what we said, the physical code that we are writing isnt what is really happening under the hood. Its being translated by the JS engine into something the computer can understand. So the syntax wether we are using Object Literals or the dot operator, whatever is going on is all doing the exact same thing under the hood of the JS engine.  Its creating an object and all of its properties and methods in memory, and thats it. The syntax that we use doesnt matter because in the end im actually creating the same thing the JS engine behaves the same way in both cases, so its just a matter of what syntax you would like to use. And as it turns out Object Literal Syntax turns out to be very powerful it can make for some cleaning looking and easy to write code. 
+
+AND THATS IT!!!! -- well this was the first 3.5 hours of a course that is essentially 12 hours long.  Hopefully this helps kind of flesh out some ideas and will save you some time in rewinding and fast forwarding.  That was the original intent on creating this, to serve as a tiny index to definitions on what may be cofusing to some.  
+
+Here is the course on udemy.com :
+
+https://www.udemy.com/course/understand-javascript/
+
+
+
+
+
+
+
+
 
 
 

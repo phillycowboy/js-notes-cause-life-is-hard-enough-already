@@ -144,5 +144,32 @@
 
 // OBJECT AND OBJECT LITERALS 
 
+// var person = new Object();
 
+var ben = {
+    firstname: 'Ben', 
+    lastname: 'Murphy',
+    address: {
+        street: '111 Main St',
+        city: 'New York',
+        state: 'NY'
+    }
+};
+
+function greet(person) {
+    console.log('Hi ' + person.firstname);
+}
+
+greet(ben);
+
+greet({ 
+    firstname: 'Mary',
+     lastname: 'Doe' 
+});
+
+ben.address2 = {
+    street: '333 Second St.';
+}
+
+// console.log(person);
 
