@@ -1,0 +1,17 @@
+Added extensions for VS Code to make life easier 
+
+Live Server -- updates html page as you work 
+
+CSS Peek -- click on id or class name and it will create css tag for you with f12 i think? also if you hit option it will split the html and css file on one page 
+Peek: load the css file inline and make quick edits right there. (Ctrl+Shift+F12)
+Go To: jump directly to the css file or open it in a new editor (F12)
+Hover: show the definition in a hover over the symbol (Ctrl+hover)
+
+color highlight-- when picking colors in css #00bdc4 it will highlight the text of the color you chose. 
+
+bracket pair colorizer--- if you nest a js object the pairs of brackets will use different colors to determine where it starts and ends 
+this might be annoying? 
+
+es7 react snippets -- shortcuts for boilerplates in react once we get there 
+
+prettier now -- auto formattting for indentation on save 

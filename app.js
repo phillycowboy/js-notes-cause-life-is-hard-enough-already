@@ -168,8 +168,9 @@ greet({
 });
 
 ben.address2 = {
-    street: '333 Second St.';
+    street: '333 Second St.'
 }
 
-// console.log(person);
+console.log(ben);
+
 
